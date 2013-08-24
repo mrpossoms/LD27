@@ -1,0 +1,127 @@
+<html>
+
+<head>
+	<style type="text/css">
+		input{
+			border: solid 1px #FFFFFF;
+			background-color:transparent;
+			color: #FFFFFF;
+		}
+
+		.player{
+			position: absolute;
+			width: 128px;
+			height: 128px;
+			margin-left: -64px;
+			margin-top: -64px;
+			background:url('images/ship.png')
+		}
+
+		.backgroundBlack{
+			z-index: 0;
+			background-color: #1F1F1F;
+		}
+
+		.Stars{
+			z-index: -1;
+			position: fixed;
+			width: 6000px;
+			height: 6000px;
+		}
+
+		.StarsNear{
+			background: url('images/bgStarsFar.png');
+			background-size:256px 256px;
+
+		}
+
+		.StarsMed{
+			background: url('images/bgStarsFar.png');
+		}
+
+		.StarsFar{
+			background: url('images/bgStarsFar.png');
+			background-size:64px 64px;
+		}
+
+		.BlackBG{
+			z-index: -1;
+			position:absolute;background-color:#000000;opacity:0.5;width:100%;height:100%;
+		}
+
+		.LobbyToggle{
+			float:left;
+			width: 32px;
+			height: 32px;
+		}
+
+		.LobbyPlayer{
+			width: 390px;
+			height: 32px;
+
+			margin-top: 10px;
+
+			border: solid 1px #FFFFFF;
+			background-color:transparent;
+			color: #FFFFFF;
+
+			-webkit-user-select: none; /* Chrome/Safari */        
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* IE10+ */
+		}
+
+		.Container{
+			z-index: 10;
+			padding: 5px;
+			width: 100%;
+			height: 100%;
+			color: #FFFFFF;
+			font-family: "Lucida Console", Monaco, monospace;
+		}
+
+		#Title{
+			color: #FFFFFF;
+			font-size: 72px;
+			font-family: "Lucida Console", Monaco, monospace;
+			text-align: center;
+			width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		#Info{
+			color: #FFFFFF;
+			font-size: 24px;
+			font-family: "Lucida Console", Monaco, monospace;
+			text-align: center;
+			width: 400px;
+			margin-left: auto;
+			margin-right: auto;
+			display: none;
+		}
+
+		#Box{
+			position: absolute;
+			z-index: 10;
+			font-size: 24px;
+			font-family: "Lucida Console", Monaco, monospace;
+			text-align: center;
+			width: 400px;
+			left:50%;
+			margin-left: -200px;
+		}
+	</style>
+</head>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="scripts/jquery.js"></script>
+<script type="text/javascript" src="/scripts/OPfoundation.js"></script>
+<script type="text/javascript" src="/scripts/client.js"></script>
+<script type="text/javascript">
+</script>
+	<body class='backgroundBlack' onClick="ConnectToGame()">
+		<div id="StarsFar" class="Stars StarsFar"></div>
+		<div id="StarsMed" class="Stars StarsMed"></div>
+		<div id="StarsNear" class="Stars StarsNear"></div>
+		<div id="Title">A Game!!!</div>
+	</body>
+</html>
