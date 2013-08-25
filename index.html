@@ -8,13 +8,57 @@
 			color: #FFFFFF;
 		}
 
-		.player{
-			position: absolute;
+		.part{
+			z-index: 40;
+			position: fixed;
+			width: 64px;
+			height: 64px;
+		}
+
+		.partButton{
+			z-index: 40;
+			width: 64px;
+			height: 64px;
+			position: relative;
+			float: left;
+			margin: 10px;
+			color: #FFFFFF;
+			text-align: center;
+			font-size: 24px;
+		}
+
+		.phatty{
+			color: #FFFFFF;
+			text-align: center;
+			font-size: 24px;
+		}
+
+		.phattyEast{
+			position: fixed;
 			width: 128px;
 			height: 128px;
-			margin-left: -64px;
-			margin-top: -64px;
-			background:url('images/ship.png')
+			background: url('images/phatstronaught.png') 0 0;
+		}
+
+		.phattyWest{
+			position: fixed;
+			width: 128px;
+			height: 128px;
+			background: url('images/phatstronaught.png') 384 0;
+		}
+
+		.phattyNorth{
+			position: fixed;
+			width: 128px;
+			height: 128px;
+			background: url('images/phatstronaught.png') 256 0;
+		}
+
+		.phattySouth{
+			position: fixed;
+			width: 128px;
+			height: 128px;
+			background: url('images/phatstronaught.png') 128 0;
 		}
 
 		.backgroundBlack{
@@ -89,8 +133,9 @@
 			margin-right: auto;
 		}
 		#Info{
+			z-index: 200;
 			color: #FFFFFF;
-			font-size: 24px;
+			font-size: 18px;
 			font-family: "Lucida Console", Monaco, monospace;
 			text-align: center;
 			width: 400px;
