@@ -48,17 +48,24 @@ function positionPlayers(players){
 
 function onJoin(socket, name){
 	if(MatchState != "Joining"){
-		socket.emit('error', "Can't join a match that is in progress. Try again.");
-		socket.disconnect('unauthorized');
-		return null;
+		//socket.emit('error', "Can't join a match that is in progress. Try again.");
+		socket.emit('error', "Waiting for the match to end...");
+		//socket.disconnect('unauthorized');
+		//return null;
 	}
 
 	console.log(name + ' has joined the game!');
 	var player = {
 		ID: -1,
+		dx: 0,
+		dy: 0,
+		x: 0,
+		y: 0,
+		parts: [],
 		Name: name,
 		Ready: false
 	};
+
 
 	return player;
 }
@@ -77,7 +84,6 @@ function onMove(player, moveData){
 			player.Ready = moveData.Ready;
 			break;
 		case "Collecting":
-			console.log("dx: " + moveData.dx + " dy: " + moveData.dy);
 			player.dx = moveData.dx;
 			player.dy = moveData.dy;
 			break;
@@ -137,9 +143,11 @@ function CollectingStage(Players, data, dt) {
 
 	if(Timer - dt < 0){
 		// DONE
-		data.ServerMessage = 'Collecting phase finished!!!';
+		data.ServerMessage = 'Collecting finished!!!';
 		data.ServerMessage += '<br/><br/>';
 
+
+		var scores = [];
 		for(var i = Players.length; i--;){
 			var p = Players[i];
 			if(!p){
@@ -147,8 +155,22 @@ function CollectingStage(Players, data, dt) {
 			}
 
 			var pp = getPlayerPartCount(p);
-			data.ServerMessage += p.Name + " - " + pp.Engines + "xEngines, " + pp.Armor + "xArmor, " + pp.Lasers + "xLasers";
-			data.ServerMessage += "<br/><br/>";
+
+
+			scores.push({
+				Name: p.Name,
+				Score: pp.Engines + pp.Armor + pp.Lasers
+			});
+		}
+
+		scores.sort(function(a, b){return b.Score - a.Score;});
+
+		data.ServerMessage +="<a style='color:#00FF00;'>" + scores[0].Name + " Wins!!!</a>";
+		data.ServerMessage += "<br/><br/>";
+		for(var i = 0; i < scores.length; i++){
+			var p = scores[i];
+			data.ServerMessage += p.Name + " - Parts:" + p.Score;
+			data.ServerMessage += "<br/>";
 		}
 
 		EndTimer -= dt;
@@ -167,7 +189,7 @@ function CollectingStage(Players, data, dt) {
 	// update players
 	for(var i = Players.length; i--;){
 		var p = Players[i];
-		if(!p){
+		if(!p || !p.parts){
 			continue;
 		}
 		var dx = p.dx * dt;

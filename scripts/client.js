@@ -1,4 +1,4 @@
-  var server = 'http://192.168.1.4';
+  var server = 'http://dev.kirkroerig.com';
   var socket = null;
   var loggedIn = false;
   var player   = null;
